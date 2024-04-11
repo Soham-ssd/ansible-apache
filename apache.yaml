@@ -1,0 +1,22 @@
+- name: learning ansible
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Install Apache httpd (state=present is optional)
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start service httpd if not started
+      service:
+        name: apache2
+        state: started
+
+    - name: Copy file with owner and permissions
+      copy:
+        src: /root/index.html
+        dest: /var/www/html/
+        owner: root
+        group: root
+        mode: "0644"
